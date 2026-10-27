@@ -1,0 +1,14 @@
+{
+    "name": "helpdesk/app",
+    "description": "aplicação de Help Desk desenvolvida em php.",
+    "type": "project",
+    "require": {
+        "php": "^8.5",
+        "ext-pdo": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    }
+}

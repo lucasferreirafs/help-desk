@@ -1,0 +1,48 @@
+services:
+  #Aplicação
+  app:
+    build: 
+      context: .
+      dockerfile: dockerfile
+
+    ports:
+      - "127.0.0.1:8080:80"
+
+    volumes:
+      - .:/var/www/html
+    
+    environment:
+      DB_HOST: ${DB_HOST:?Set DB_HOST in the .env}
+      DB_PORT: ${DB_PORT:?Set DB_PORT in the .env}
+      DB_DATABASE: ${DB_DATABASE:?Set DB_DATABASE in the .env}
+      DB_USERNAME: ${DB_USERNAME:?Set DB_USERNAME in the .env}
+      DB_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD in the .env}
+
+    depends_on:
+      db_helpdesk:
+        condition: service_healthy
+  
+  # Banco de dados
+  db_helpdesk:
+    image: postgres:18
+
+    ports:
+      - "127.0.0.1:5433:5432"
+
+    environment:
+      POSTGRES_DB: ${DB_DATABASE:?Set DB_DATABASE in the .env}
+      POSTGRES_USER: ${DB_USERNAME:?Set DB_USERNAME in the .env}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD in the .env}
+
+    volumes:
+      - postgres_data:/var/lib/postgresql
+    
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U \"$${POSTGRES_USER}\" -d \"$${POSTGRES_DB}\""]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+volumes:
+  postgres_data:
