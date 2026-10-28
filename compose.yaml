@@ -17,6 +17,7 @@ services:
       DB_DATABASE: ${DB_DATABASE:?Set DB_DATABASE in the .env}
       DB_USERNAME: ${DB_USERNAME:?Set DB_USERNAME in the .env}
       DB_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD in the .env}
+      DB_SSLMODE: ${DB_SSLMODE:?Set DB_SSLMODE in the .env}
 
     depends_on:
       db_helpdesk:
