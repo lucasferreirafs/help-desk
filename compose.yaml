@@ -1,9 +1,10 @@
 services:
-  #Aplicação
+  #Aplicação PHP
   app:
     build: 
       context: .
       dockerfile: dockerfile
+      target: development
 
     ports:
       - "127.0.0.1:8080:80"
@@ -22,6 +23,23 @@ services:
     depends_on:
       db_helpdesk:
         condition: service_healthy
+
+# Node - Tailwindcss
+  assets:
+    image: node:26-alpine
+
+    working_dir: /app
+
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules
+
+    command:
+      - sh
+      - -c
+      - npm ci --include=dev && npm run dev
+
+    stdin_open: true
   
   # Banco de dados
   db_helpdesk:
@@ -47,3 +65,4 @@ services:
 
 volumes:
   postgres_data:
+  node_modules:
