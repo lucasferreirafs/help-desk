@@ -23,5 +23,7 @@ use App\Core\View;
     <main class="flex flex-1 items-center justify-center bg-gray-100">
         <?= $content ?>
     </main>
+
+    <script src="/assets/js/app.js"></script>
 </body>
 </html>
