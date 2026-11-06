@@ -12,27 +12,21 @@ final class Http
     private const array ERRORS = [
         400 => [
             'title' => 'Requisição Inválida',
-            'message' => 'Não foi possível interpretar a requisição.',
         ],
         401 => [
             'title' => 'Autenticação necessária',
-            'message' => 'Entre no sistema com uma conta valida para acessar esta página.',
         ],
         403 => [
-            'title' => 'Acesso não permitido',
-            'message' => 'Você não tem permissão para realizar esta ação.',
+            'title' => 'Acesso negado',
         ],
         404 => [
             'title' => 'Página não encontrada',
-            'message' => 'O endereço solicitado não foi encontrado.',
         ],
         405 => [
             'title' => 'Método não permitido',
-            'message' => 'Este endereço não aceita o método utilizado.',
         ],
         500 => [
-            'title' => 'Erro interno',
-            'message' => 'Não foi possível concluir a solicitação. Tente novamente mais tarde.',
+            'title' => 'Erro interno do servidor',
         ],
     ];
 
