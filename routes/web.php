@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Controllers\{LandingPageController, AuthController};
+use App\Controllers\{LandingPageController, AuthController, HomeController};
 
 use App\Middleware\{AuthMiddleware, CsrfMiddleware};
 
@@ -11,7 +11,7 @@ $csrf = new CsrfMiddleware();
 
 
 $router->get('/', [LandingPageController::class, 'landingPage']);
-
-// Autenticação
-$router->get('/login',[AuthController::class, 'form']);
-
+$router->get('/login', [AuthController::class, 'loginForm']);
+$router->post('/login', [AuthController::class, 'login'], [$csrf]);
+$router->post('/logout', [AuthController::class, 'logout'], [$auth, $csrf]);
+$router->get('/home', [HomeController::class, 'index'], [$auth]);

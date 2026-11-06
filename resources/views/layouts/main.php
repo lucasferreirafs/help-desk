@@ -13,19 +13,30 @@ use App\Core\View;
     <title><?= View::escape($title ?? 'Help Desk') ?></title>
 </head>
 <body>
-    <header>
-        <h1>logo</h1>
+    <header class="bg-gray-800 p-5 flex justify-between items-center">
+        <h1 class="text-white text-3xl font-bold uppercase">logo</h1>
         <nav>
-            <ul>
-                <li>home</li>
-                <li>contato</li>
-                <li>login</li>
+            <ul class="flex gap-3 text-white">
+                <li class="font-medium cursor-pointer hover:text-gray-500">Home</li>
+                <li class="font-medium cursor-pointer hover:text-gray-500">Contato</li>
+                <li class="font-medium cursor-pointer hover:text-gray-500">Login</li>
             </ul>
         </nav>
     </header>
     
-    <main>
-        <?= $content ?>
+    <main class="p-6">
+        <h1 class="text-2xl font-bold">Bem-vindo, <?= View::escape($userInfo['username']) ?></h1>
+        <p>Home <?= View::escape($userInfo['role']) ?></p>
+        <div>
+            <?= $content ?>
+        </div>
+
+        <form action="/logout" method="post">
+            <input type="hidden" name="_token" value="<?= View::escape($_SESSION['csrf_token']) ?>">
+            <button type="submit" class="text-2xl font-medium text-blue-500 hover:text-blue-900 hover:underline mt-10 cursor-pointer">
+                Sair da conta
+            </button>
+        </form>
     </main>
 </body>
 </html>
